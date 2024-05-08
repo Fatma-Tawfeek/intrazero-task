@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Diploma;
 use App\Models\SubjectCategory;
 use App\Policies\DiplomaPolicy;
+use App\Policies\SubjectPolicy;
 use App\Policies\CategoryPolicy;
 use Illuminate\Support\Facades\Gate;
 use App\Policies\SubjectCategoryPolicy;
@@ -45,5 +46,11 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('create-diplomas', [DiplomaPolicy::class, 'create']);
         Gate::define('edit-diplomas', [DiplomaPolicy::class, 'update']);
         Gate::define('delete-diplomas', [DiplomaPolicy::class, 'delete']);
+
+        // subject policies
+        Gate::define('view-subjects', [SubjectPolicy::class, 'viewAny']);
+        Gate::define('create-subjects', [SubjectPolicy::class, 'create']);
+        Gate::define('edit-subjects', [SubjectPolicy::class, 'update']);
+        Gate::define('delete-subjects', [SubjectPolicy::class, 'delete']);
     }
 }

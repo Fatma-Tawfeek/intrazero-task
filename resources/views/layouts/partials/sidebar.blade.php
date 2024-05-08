@@ -51,6 +51,16 @@
               </a>
             </li>              
             @endcan   
+            @can('view-subjects', \App\Models\Subject::class)
+            <li class="nav-item">
+              <a href="{{ route('subjects.index') }}" class="nav-link {{ request()->is('subjects*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-book"></i>
+                <p>
+                  Subjects
+                </p>
+              </a>
+            </li>              
+            @endcan   
             @can('view-diplomas', \App\Models\Diploma::class)
             <li class="nav-item">
               <a href="{{ route('diplomas.index') }}" class="nav-link {{ request()->is('diplomas*') ? 'active' : '' }}">
@@ -61,7 +71,7 @@
               </a>
             </li>              
             @endcan   
-        </ul>
+          </ul>
       </nav>
       <!-- /.sidebar-menu -->
     </div>

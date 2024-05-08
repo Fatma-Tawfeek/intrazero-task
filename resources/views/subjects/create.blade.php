@@ -1,11 +1,11 @@
 @extends('layouts.master')
 
-@section('title', 'Add Category')
+@section('title', 'Add Subject')
 
 @section('breadcrumb')
 @parent
-<li class="breadcrumb-item active">Categories</li>
-<li class="breadcrumb-item active">Add Category</li>
+<li class="breadcrumb-item active">Subjects</li>
+<li class="breadcrumb-item active">Add Subject</li>
 @endSection
 
 @section('content')
@@ -15,11 +15,11 @@
             <div class="col-12">
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Add Category</h3>
+                  <h3 class="card-title">Add Subject</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form action="{{ route('categories.store') }}" method="post">
+                <form action="{{ route('subjects.store') }}" method="post">
                   @csrf
                   <div class="card-body">
                     <div class="form-group">
@@ -32,14 +32,14 @@
                       @enderror
                     </div>
                     <div class="form-group">
-                      <label>Parent Category</label>
-                      <select class="form-control @error('parent_id') is-invalid @enderror" name="parent_id">
-                        <option value="">No parent</option>
+                      <label>Category</label>
+                      <select class="form-control @error('subject_category_id') is-invalid @enderror" name="subject_category_id">
+                        <option value="">No category</option>
                         @foreach ($categories as $cat)
                           <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                         @endforeach
                       </select>
-                      @error('parent_id')
+                      @error('subject_category_id')
                       <div class="invalid-feedback">
                         {{ $message }}
                       </div>

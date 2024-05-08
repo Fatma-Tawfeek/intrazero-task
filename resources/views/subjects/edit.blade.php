@@ -1,11 +1,11 @@
 @extends('layouts.master')
 
-@section('title', 'Add Category')
+@section('title', 'Edit subjects')
 
 @section('breadcrumb')
 @parent
-<li class="breadcrumb-item active">Categories</li>
-<li class="breadcrumb-item active">Add Category</li>
+<li class="breadcrumb-item active">Subjects</li>
+<li class="breadcrumb-item active">Edit subjects</li>
 @endSection
 
 @section('content')
@@ -15,31 +15,31 @@
             <div class="col-12">
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Add Category</h3>
+                  <h3 class="card-title">Edit subjects</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form action="{{ route('categories.store') }}" method="post">
+                <form action="{{ route('subjects.update', $subject->id) }}" method="post">
                   @csrf
+                  @method('put')
                   <div class="card-body">
                     <div class="form-group">
                       <label>Name</label>
-                      <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Enter name">
+                      <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Enter name" value="{{ $subject->name }}">
                       @error('name')
                       <div class="invalid-feedback">
                         {{ $message }}
                       </div>
-                      @enderror
+                    @enderror
                     </div>
                     <div class="form-group">
-                      <label>Parent Category</label>
-                      <select class="form-control @error('parent_id') is-invalid @enderror" name="parent_id">
-                        <option value="">No parent</option>
+                      <label>Category</label>
+                      <select class="form-control" name="subject_category_id">
                         @foreach ($categories as $cat)
-                          <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                          <option value="{{ $cat->id }}" {{ $cat->id == $subject->subject_category_id ? 'selected' : '' }}>{{ $cat->name }}</option>
                         @endforeach
                       </select>
-                      @error('parent_id')
+                      @error('subject_category_id')
                       <div class="invalid-feedback">
                         {{ $message }}
                       </div>
@@ -48,7 +48,7 @@
                   </div>
                   <!-- /.card-body -->
                   <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="submit" class="btn btn-primary">Edit</button>
                   </div>
                 </form>
               </div>

@@ -26,7 +26,7 @@
             <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
             <p>
               {{ Auth::user()->name }}
-              <small>member since {{ Auth::user()->created_at }} </small>
+              <small>member since {{ date('M. Y', strtotime(Auth::user()->created_at)) }} </small>
             </p>
           </li>
           <!-- Menu Body -->

@@ -36,7 +36,7 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'parent_id' => 'exists:subject_categories,id',
+            'parent_id' => 'nullable|exists:subject_categories,id',
         ]);
         Category::create($request->all());
         return redirect()->route('categories.index')->with('success', 'Category created successfully.');
@@ -58,7 +58,7 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'parent_id' => 'exists:subject_categories,id',
+            'parent_id' => 'nullable|exists:subject_categories,id',
         ]);
         $category->update($request->all());
         return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
