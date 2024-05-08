@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DiplomaController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,18 +16,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+    Route::get('/admin/login', [AdminController::class, 'getLoginPage'])->name('admin.get.login');
+    Route::post('/admin/login', [AdminController::class, 'login'])->name('admin.login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
+// Dashboard Routes
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    // categories routes
+    Route::resource('/categories', CategoryController::class);
+    // diplomas routes
+    Route::resource('/diplomas', DiplomaController::class);
 });
 
-require __DIR__.'/auth.php';
+
+
+require __DIR__ . '/auth.php';
