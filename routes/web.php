@@ -11,6 +11,7 @@ use App\Http\Controllers\DiplomaController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StudyPlanController;
 
 /*
@@ -47,9 +48,7 @@ Route::group(['middleware' => 'guest'], function () {
 
 // Dashboard Routes
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
     // categories routes
     Route::resource('/categories', CategoryController::class);
