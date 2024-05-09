@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('study_plannables', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('study_plan_id')->constrained();
+            $table->foreignId('study_plan_id')->constrained('study_plans')->onDelete('cascade');
             $table->morphs('study_plannable');
             $table->timestamps();
         });

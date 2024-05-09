@@ -20,4 +20,9 @@ class Diploma extends Model
     {
         return $this->belongsToMany(Course::class, 'study_plannable')->withTimestamps();
     }
+
+    public function tutor()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

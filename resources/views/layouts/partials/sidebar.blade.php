@@ -81,6 +81,16 @@
               </a>
             </li>              
             @endcan   
+            @can('view-study-plans', \App\Models\StudyPlan::class)
+            <li class="nav-item">
+              <a href="{{ route('study-plans.index') }}" class="nav-link {{ request()->is('study-plans*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-copy"></i>
+                <p>
+                  Study Plans
+                </p>
+              </a>
+            </li>              
+            @endcan   
           </ul>
       </nav>
       <!-- /.sidebar-menu -->

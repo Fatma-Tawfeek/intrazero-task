@@ -11,8 +11,13 @@ class StudyPlan extends Model
 
     protected $fillable = ['name'];
 
-    public function subjects()
+    public function courses()
     {
-        return $this->hasMany(Subject::class);
+        return $this->morphedByMany(Course::class, 'study_plannable')->withTimestamps();
+    }
+
+    public function diplomas()
+    {
+        return $this->morphedByMany(Diploma::class, 'study_plannable')->withTimestamps();
     }
 }

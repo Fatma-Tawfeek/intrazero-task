@@ -11,6 +11,7 @@ use App\Models\SubjectCategory;
 use App\Policies\DiplomaPolicy;
 use App\Policies\SubjectPolicy;
 use App\Policies\CategoryPolicy;
+use App\Policies\StudyPlanPolicy;
 use Illuminate\Support\Facades\Gate;
 use App\Policies\SubjectCategoryPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -59,5 +60,11 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('create-courses', [CoursePolicy::class, 'create']);
         Gate::define('edit-courses', [CoursePolicy::class, 'update']);
         Gate::define('delete-courses', [CoursePolicy::class, 'delete']);
+
+        // study plans policies
+        Gate::define('view-study-plans', [StudyPlanPolicy::class, 'viewAny']);
+        Gate::define('create-study-plans', [StudyPlanPolicy::class, 'create']);
+        Gate::define('edit-study-plans', [StudyPlanPolicy::class, 'update']);
+        Gate::define('delete-study-plans', [StudyPlanPolicy::class, 'delete']);
     }
 }

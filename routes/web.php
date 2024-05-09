@@ -6,6 +6,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DiplomaController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\StudyPlanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/subjects', SubjectController::class);
     // courses routes
     Route::resource('/courses', CourseController::class);
+    // study plans routes
+    Route::resource('/study-plans', StudyPlanController::class);
 });
 
 require __DIR__ . '/auth.php';

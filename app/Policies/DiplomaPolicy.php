@@ -29,7 +29,7 @@ class DiplomaPolicy
      */
     public function update(User $user, Diploma $diploma): bool
     {
-        return $user->hasPermission('edit-diplomas');
+        return $user->hasPermission('edit-diplomas') || $user->id === $diploma->user_id;
     }
 
     /**
@@ -37,6 +37,6 @@ class DiplomaPolicy
      */
     public function delete(User $user, Diploma $diploma): bool
     {
-        return $user->hasPermission('delete-diplomas');
+        return $user->hasPermission('delete-diplomas') || $user->id === $diploma->user_id;
     }
 }
