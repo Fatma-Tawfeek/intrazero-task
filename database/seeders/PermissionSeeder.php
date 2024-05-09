@@ -51,5 +51,11 @@ class PermissionSeeder extends Seeder
 
         $adminRole = \App\Models\Role::where('name', 'admin')->first();
         $adminRole->permissions()->attach(\Illuminate\Support\Arr::pluck(\App\Models\Permission::all(), 'id'));
+
+        $tutorRole = \App\Models\Role::where('name', 'tutor')->first();
+        $tutorRole->permissions()->attach([9, 10, 11, 12, 17, 21, 25, 26, 27, 28]);
+
+        $studentRole = \App\Models\Role::where('name', 'student')->first();
+        $studentRole->permissions()->attach([9, 17, 25]);
     }
 }

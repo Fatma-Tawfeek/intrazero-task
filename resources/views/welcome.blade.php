@@ -58,7 +58,7 @@
 
 <div class="button-container">
     <button class="admin-btn" onclick="loginAsAdmin()"><i class="fas fa-user-shield"></i>Login as Admin</button>
-    <button class="tutor-btn" onclick="loginAsTutor()"><i class="fas fa-chalkboard-teacher"></i>Login as Tutor</button>
+    <button class="tutor-btn" onclick="loginAsTutor()"><i class="fas fa-chalkboard-teacher"></i>Login/Register as Tutor</button>
     <button class="student-btn" onclick="loginOrRegisterAsStudent()"><i class="fas fa-user-graduate"></i>Login/Register as Student</button>
 </div>
 
@@ -68,13 +68,11 @@
     }
 
     function loginAsTutor() {
-        // Add login as tutor functionality
-        alert("Logging in as tutor...");
+        window.location.href = "{{ route('tutor.get.login') }}";       
     }
 
     function loginOrRegisterAsStudent() {
-        // Add login/register as student functionality
-        alert("Logging in/registering as student...");
+        window.location.href = "{{ route('student.get.login') }}";
     }
 </script>
 
