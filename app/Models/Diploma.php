@@ -18,7 +18,7 @@ class Diploma extends Model
 
     public function studyPlans()
     {
-        return $this->belongsToMany(Course::class, 'study_plannable')->withTimestamps();
+        return $this->morphToMany(StudyPlan::class, 'study_plannable')->withTimestamps();
     }
 
     public function tutor()

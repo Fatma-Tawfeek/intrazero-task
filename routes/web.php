@@ -28,7 +28,7 @@ use App\Http\Controllers\StudyPlanController;
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/', function () {
         return view('welcome');
-    });
+    })->name('welcome');
     // admin login
     Route::get('/admin/login', [AdminController::class, 'getLoginPage'])->name('admin.get.login');
     Route::post('/admin/login', [AdminController::class, 'login'])->name('admin.login');
@@ -50,6 +50,9 @@ Route::group(['middleware' => 'guest'], function () {
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
+    // logout
+    Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+
     // categories routes
     Route::resource('/categories', CategoryController::class);
     // diplomas routes
@@ -67,5 +70,3 @@ Route::middleware('auth')->group(function () {
     Route::get('users/{user}/edit-role', [UserController::class, 'edit'])->name('users.edit');
     Route::put('/users/{user}/update-role', [UserController::class, 'update'])->name('users.update');
 });
-
-require __DIR__ . '/auth.php';
