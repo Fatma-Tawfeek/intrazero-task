@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use App\Models\User;
 use App\Models\Diploma;
+use App\Policies\CoursePolicy;
 use App\Models\SubjectCategory;
 use App\Policies\DiplomaPolicy;
 use App\Policies\SubjectPolicy;
@@ -52,5 +53,11 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('create-subjects', [SubjectPolicy::class, 'create']);
         Gate::define('edit-subjects', [SubjectPolicy::class, 'update']);
         Gate::define('delete-subjects', [SubjectPolicy::class, 'delete']);
+
+        // courses policies
+        Gate::define('view-courses', [CoursePolicy::class, 'viewAny']);
+        Gate::define('create-courses', [CoursePolicy::class, 'create']);
+        Gate::define('edit-courses', [CoursePolicy::class, 'update']);
+        Gate::define('delete-courses', [CoursePolicy::class, 'delete']);
     }
 }

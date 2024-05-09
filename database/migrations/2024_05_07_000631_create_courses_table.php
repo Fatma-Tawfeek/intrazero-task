@@ -16,9 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->string('image')->nullable();
-            $table->string('price')->nullable();
-            $table->string('duration')->nullable();
-            $table->boolean('status')->default(0);
             $table->foreignId('user_id')->constrained();
             $table->foreignId('subject_id')->constrained();
             $table->timestamps();

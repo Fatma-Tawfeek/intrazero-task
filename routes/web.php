@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DiplomaController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\CategoryController;
@@ -37,6 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/diplomas', DiplomaController::class);
     // subject routes
     Route::resource('/subjects', SubjectController::class);
+    // courses routes
+    Route::resource('/courses', CourseController::class);
 });
 
 require __DIR__ . '/auth.php';
