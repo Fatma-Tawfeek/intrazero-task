@@ -36,7 +36,10 @@ class DiplomaController extends Controller
             'subject_id' => 'required|array',
             'subject_id.*' => 'required|integer|exists:subjects,id'
         ]);
-        $diploma = Diploma::create($request->all());
+        $diploma = Diploma::create([
+            'name' => $request->name,
+            'user_id' => auth()->user()->id
+        ]);
         $diploma->subjects()->attach($request->subject_id);
         return redirect()->route('diplomas.index')->with('success', 'Diploma created successfully.');
     }
@@ -59,7 +62,10 @@ class DiplomaController extends Controller
             'subject_id' => 'required|array',
             'subject_id.*' => 'required|integer|exists:subjects,id'
         ]);
-        $diploma->update($request->all());
+        $diploma->update([
+            'name' => $request->name,
+            'user_id' => auth()->user()->id
+        ]);
         $diploma->subjects()->sync($request->subject_id);
         return redirect()->route('diplomas.index')->with('success', 'Diploma updated successfully.');
     }

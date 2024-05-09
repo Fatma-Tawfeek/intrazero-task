@@ -1,10 +1,10 @@
 @extends('layouts.master')
 
-@section('title', 'diploma')
+@section('title', 'Roles')
 
 @section('breadcrumb')
 @parent
-<li class="breadcrumb-item active">Diplomas</li>
+<li class="breadcrumb-item active">Roles</li>
 @endSection
 
 @section('content')
@@ -14,10 +14,10 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                      <h3 class="card-title">Diplomas List</h3>
-                      @can('create-diplomas', \App\Models\Diploma::class)
+                      <h3 class="card-title">Roles List</h3>
+                      @can('create-roles', \App\Models\Role::class)
                       <div class="float-right">
-                        <a href="{{ route('diplomas.create') }}" class="btn btn-primary">Add Diploma</a>
+                        <a href="{{ route('roles.create') }}" class="btn btn-primary">Add Role</a>
                       </div>                        
                       @endcan
                     </div>
@@ -28,35 +28,33 @@
                           <tr>
                             <th style="width: 10px">#</th>
                             <th>Name</th>
-                            <th>Subjects</th>
-                            <th>Tutor</th>
+                            <th>Permissions</th>
                             <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
-                            @forelse ($diplomas as $diploma)
+                            @forelse ($roles as $role)
                             <tr>
-                                <td>{{ $diplomas->firstItem() + $loop->index }}</td>
-                                <td>{{ $diploma->name }}</td>
-                                <td>
-                                  @forelse ($diploma->subjects as $subject)
-                                    <span class="badge badge-primary">{{ $subject->name }}</span>
+                                <td>{{ $roles->firstItem() + $loop->index }}</td>
+                                <td>{{ $role->name }}</td>
+                                <td style="width: 800px">
+                                  @forelse ($role->permissions as $permission)
+                                    <span class="badge badge-primary">{{ $permission->name }}</span>
                                   @empty
-                                    <span class="badge badge-secondary">No subjects</span>
+                                    <span class="badge badge-secondary">No permissions</span>
                                   @endforelse
                                 </td>
-                                <td>{{ $diploma->tutor->name }}</td>
                                 <td> 
                                     <div class="btn-group">
 
-                                      @can('edit-diplomas', $diploma)
-                                      <a href="{{ route('diplomas.edit', $diploma->id) }}" class="btn btn-primary mr-2">
+                                      @can('edit-roles', $role)
+                                      <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-primary mr-2">
                                         <i class="fas fa-edit"></i>                                          
                                         Edit</a>
                                       @endcan
 
-                                      @can('delete-diplomas', $diploma)
-                                      <form action="{{ route('diplomas.destroy', $diploma->id) }}" method="post">
+                                      @can('delete-roles', $role)
+                                      <form action="{{ route('roles.destroy', $role->id) }}" method="post">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger">
@@ -69,7 +67,7 @@
                             </tr>      
                             @empty
                                 <tr>
-                                    <td colspan="6">No diplomas found.</td>
+                                    <td colspan="6">No roles found.</td>
                                 </tr>                          
                             @endforelse                          
                         </tbody>
@@ -77,7 +75,7 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer clearfix">
-                      {{ $diplomas->links() }}
+                      {{ $roles->links() }}
                     </div>
                   </div>
             </div>
