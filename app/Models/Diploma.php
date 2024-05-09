@@ -13,6 +13,11 @@ class Diploma extends Model
 
     public function subjects()
     {
-        return $this->hasMany(Subject::class);
+        return $this->belongsToMany(Subject::class, 'diploma_subject')->withTimestamps();
+    }
+
+    public function studyPlans()
+    {
+        return $this->belongsToMany(Course::class, 'study_plannable')->withTimestamps();
     }
 }

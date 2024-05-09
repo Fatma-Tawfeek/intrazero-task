@@ -26,4 +26,9 @@ class Course extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function studyPlans()
+    {
+        return $this->morphToMany(StudyPlan::class, 'study_plannable')->withTimestamps();
+    }
 }

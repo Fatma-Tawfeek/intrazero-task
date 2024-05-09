@@ -31,6 +31,19 @@
                       </div>
                       @enderror
                     </div>
+                    <div class="form-group">
+                      <label for="">Subjects</label> <br>
+                      <select class="js-example-basic-multiple form-control @error('subject_id') is-invalid @enderror" name="subject_id[]" multiple="multiple">
+                        @foreach ($subjects as $subject)
+                          <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                        @endforeach
+                      </select>
+                      @error('subject_id')
+                      <div class="invalid-feedback">
+                        {{ $message }}
+                      </div>
+                      @enderror
+                    </div>                    
                   </div>
                   <!-- /.card-body -->
                   <div class="card-footer">
@@ -44,3 +57,19 @@
 </section>
 
 @endSection
+
+@push('scripts')
+  
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+  <script>
+  $(document).ready(function() {
+    $('.js-example-basic-multiple').select2();
+  });
+  </script>
+  
+@endpush
+
+@push('styles')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />  
+@endpush

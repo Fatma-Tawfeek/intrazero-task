@@ -28,6 +28,7 @@
                           <tr>
                             <th style="width: 10px">#</th>
                             <th>Name</th>
+                            <th>Subjects</th>
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -36,6 +37,7 @@
                             <tr>
                                 <td>{{ $diplomas->firstItem() + $loop->index }}</td>
                                 <td>{{ $diploma->name }}</td>
+                                <td>{{ $diploma->subjects->pluck('name')->implode(', ') }}</td>
                                 <td> 
                                     <div class="btn-group">
 

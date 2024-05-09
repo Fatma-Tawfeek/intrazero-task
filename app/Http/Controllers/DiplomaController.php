@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Diploma;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 
 class DiplomaController extends Controller
@@ -21,7 +22,8 @@ class DiplomaController extends Controller
      */
     public function create()
     {
-        return view('diplomas.create');
+        $subjects = Subject::all();
+        return view('diplomas.create', compact('subjects'));
     }
 
     /**
@@ -31,8 +33,11 @@ class DiplomaController extends Controller
     {
         $request->validate([
             'name' => 'required|string|min:3|max:255',
+            'subject_id' => 'required|array',
+            'subject_id.*' => 'required|integer|exists:subjects,id'
         ]);
-        Diploma::create($request->all());
+        $diploma = Diploma::create($request->all());
+        $diploma->subjects()->attach($request->subject_id);
         return redirect()->route('diplomas.index')->with('success', 'Diploma created successfully.');
     }
     /**
@@ -40,7 +45,8 @@ class DiplomaController extends Controller
      */
     public function edit(Diploma $diploma)
     {
-        return view('diplomas.edit', compact('diploma'));
+        $subjects = Subject::all();
+        return view('diplomas.edit', compact('diploma', 'subjects'));
     }
 
     /**
@@ -50,8 +56,11 @@ class DiplomaController extends Controller
     {
         $request->validate([
             'name' => 'required|string|min:3|max:255',
+            'subject_id' => 'required|array',
+            'subject_id.*' => 'required|integer|exists:subjects,id'
         ]);
         $diploma->update($request->all());
+        $diploma->subjects()->sync($request->subject_id);
         return redirect()->route('diplomas.index')->with('success', 'Diploma updated successfully.');
     }
 
@@ -60,6 +69,7 @@ class DiplomaController extends Controller
      */
     public function destroy(Diploma $diploma)
     {
+        $diploma->subjects()->detach();
         $diploma->delete();
         return redirect()->route('diplomas.index')->with('success', 'Diploma deleted successfully.');
     }

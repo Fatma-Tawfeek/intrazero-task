@@ -15,4 +15,9 @@ class Subject extends Model
     {
         return $this->belongsTo(Category::class, 'subject_category_id');
     }
+
+    public function diplomas()
+    {
+        return $this->belongsToMany(Diploma::class, 'diploma_subject')->withTimestamps();
+    }
 }
