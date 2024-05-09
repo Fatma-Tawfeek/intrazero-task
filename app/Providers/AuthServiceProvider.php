@@ -7,6 +7,7 @@ namespace App\Providers;
 use App\Models\User;
 use App\Models\Diploma;
 use App\Policies\RolePolicy;
+use App\Policies\UserPolicy;
 use App\Policies\CoursePolicy;
 use App\Models\SubjectCategory;
 use App\Policies\DiplomaPolicy;
@@ -73,5 +74,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('create-roles', [RolePolicy::class, 'create']);
         Gate::define('edit-roles', [RolePolicy::class, 'update']);
         Gate::define('delete-roles', [RolePolicy::class, 'delete']);
+
+        // user policies
+        Gate::define('view-users', [UserPolicy::class, 'viewAny']);
+        Gate::define('edit-users', [UserPolicy::class, 'update']);
     }
 }

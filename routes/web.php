@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DiplomaController;
@@ -46,6 +47,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('/study-plans', StudyPlanController::class);
     // roles routes
     Route::resource('/roles', RoleController::class);
+    // users routes
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('users/{user}/edit-role', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{user}/update-role', [UserController::class, 'update'])->name('users.update');
 });
 
 require __DIR__ . '/auth.php';

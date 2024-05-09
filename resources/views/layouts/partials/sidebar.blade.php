@@ -91,12 +91,22 @@
               </a>
             </li>              
             @endcan  
-            @can('view-roles', \App\Models\StudyPlan::class)
+            @can('view-roles', \App\Models\Role::class)
             <li class="nav-item">
               <a href="{{ route('roles.index') }}" class="nav-link {{ request()->is('roles*') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-user-shield"></i>
                 <p>
                   Roles
+                </p>
+              </a>
+            </li>              
+            @endcan   
+            @can('view-users', \App\Models\User::class)
+            <li class="nav-item">
+              <a href="{{ route('users.index') }}" class="nav-link {{ request()->is('users*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-users"></i>
+                <p>
+                  Users
                 </p>
               </a>
             </li>              
